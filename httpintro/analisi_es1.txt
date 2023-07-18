@@ -1,0 +1,63 @@
+All'indirizzo https://randomuser.me/api/
+è possibile ottenere delle informazioni sempre diverse di utenti
+generati casualmente.
+Valutare statisticamente in 1000 richieste quale sia la percentuale
+di utenti donna generati.
+
+Un dato di esempio:
+{
+    "gender": "male",
+    "name": {
+        "title": "Mr",
+        "first": "Jesús",
+        "last": "Guevara"
+    },
+    "location": {
+        "street": {
+            "number": 1072,
+            "name": "Diagonal Sur Ponce"
+        },
+        "city": "Cuautepec de Hinojosa",
+        "state": "Baja California Sur",
+        "country": "Mexico",
+        "postcode": 14775,
+        "coordinates": {
+            "latitude": "23.3326",
+            "longitude": "-5.8740"
+        },
+        "timezone": {
+            "offset": "+11:00",
+            "description": "Magadan, Solomon Islands, New Caledonia"
+        }
+    },
+    "email": "jesus.guevara@example.com",
+    "login": {
+        "uuid": "76f19310-dca0-4441-99c0-ac7bf417c6ce",
+        "username": "silverbear686",
+        "password": "manowar",
+        "salt": "3WOartfZ",
+        "md5": "25c6647d2b13957e48596f875f39bbed",
+        "sha1": "b6183c403024a6c66c562b6d6133eeb367f47fa9",
+        "sha256": "8991fd3c2e3dff85d03796348eb235731249fa623cefa7316655d9360f7411d5"
+    },
+    "dob": {
+        "date": "1988-09-18T23:04:16.051Z",
+        "age": 34
+    },
+    "registered": {
+        "date": "2011-12-14T18:14:36.513Z",
+        "age": 11
+    },
+    "phone": "(692) 048 3787",
+    "cell": "(656) 344 8026",
+    "id": {
+        "name": "NSS",
+        "value": "51 99 45 5354 8"
+    },
+    "picture": {
+        "large": "https://randomuser.me/api/portraits/men/70.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/70.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/70.jpg"
+    },
+    "nat": "MX"
+}

@@ -1,15 +1,21 @@
-import { Status } from './shoppingservice.js';
-import fs from 'fs';
-export class FileShoppingService {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FileShoppingService = void 0;
+const shoppingservice_js_1 = require("./shoppingservice.js");
+const fs_1 = __importDefault(require("fs"));
+class FileShoppingService {
     fileName;
     constructor(fileName) {
         this.fileName = fileName;
     }
     async load() {
-        if (!fs.existsSync(this.fileName))
+        if (!fs_1.default.existsSync(this.fileName))
             return [];
         try {
-            return JSON.parse(await fs.promises.readFile(this.fileName, 'utf-8'));
+            return JSON.parse(await fs_1.default.promises.readFile(this.fileName, 'utf-8'));
         }
         catch (e) {
             console.log(e);
@@ -18,7 +24,7 @@ export class FileShoppingService {
     }
     async save(data) {
         try {
-            await fs.promises.writeFile(this.fileName, JSON.stringify(data));
+            await fs_1.default.promises.writeFile(this.fileName, JSON.stringify(data));
             return true;
         }
         catch (e) {
@@ -44,11 +50,13 @@ export class FileShoppingService {
             item.forEach(v => {
                 v.id = ++id;
                 v.createdAt = new Date();
+                v.status = shoppingservice_js_1.Status.ToBuy;
                 data.push(v);
             });
         }
         else {
             item.id = id + 1;
+            item.status = shoppingservice_js_1.Status.ToBuy;
             item.createdAt = new Date();
             data.push(item);
         }
@@ -60,7 +68,7 @@ export class FileShoppingService {
         let item = data.filter(i => i.id == itemId).pop();
         if (!item)
             throw "Item not found";
-        item.status = Status.Purchased;
+        item.status = shoppingservice_js_1.Status.Purchased;
         await this.save(data);
         return item;
     }
@@ -74,3 +82,4 @@ export class FileShoppingService {
         return item;
     }
 }
+exports.FileShoppingService = FileShoppingService;

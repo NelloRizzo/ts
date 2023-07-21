@@ -1,8 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Status = exports.CartItem = void 0;
 var Status;
 (function (Status) {
     Status[Status["Purchased"] = 0] = "Purchased";
     Status[Status["ToBuy"] = 1] = "ToBuy";
-})(Status || (Status = {}));
+})(Status || (exports.Status = Status = {}));
 class CartItem {
     id;
     name;
@@ -23,4 +26,4 @@ class CartItem {
         this.createdAt = createdAt;
     }
 }
-export { CartItem, Status };
+exports.CartItem = CartItem;

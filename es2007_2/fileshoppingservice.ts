@@ -44,11 +44,13 @@ export class FileShoppingService implements IShoppingService {
             item.forEach(v => {
                 v.id = ++id
                 v.createdAt = new Date()
+                v.status = Status.ToBuy
                 data.push(v)
             })
         }
         else {
             item.id = id + 1
+            item.status = Status.ToBuy
             item.createdAt = new Date()
             data.push(item)
         }

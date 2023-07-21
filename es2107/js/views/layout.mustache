@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it" title="Fiscal Code Generator">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calcolo del Codice Fiscale</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="h1 text-center">Calcolo del Codice Fiscale</div>
+        <div class="row">
+            <div class="offset-2 col-8">
+                <form class="form" method="post" action="/">
+                    <fieldset class="fieldset h4">Dati Anagrafici</fieldset>
+                    <div class="row">
+                        <label class="control-label" for="firstName">Nome</label>
+                        <div class="col">
+                            <input class="form-control" value="{{firstName}}" name="firstName" id="firstName" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="control-label" for="lastName">Cognome</label>
+                        <div class="col">
+                            <input class="form-control" value="{{lastName}}" name="lastName" id="lastName" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="control-label" for="genderMale">Sesso</label>
+                        </div>
+                        <div class="col-1">
+                            <input class="form-check-input" type="radio" {{#isMale}}checked{{/isMale}} name="gender"
+                                id="genderMale">
+                            <label class="form-check-label" for="genderMale">M</label>
+                        </div>
+                        <div class="col-1">
+                            <input class="form-check-input" type="radio" {{^isMale}}checked{{/isMale}}
+                                name="gender" id="genderFemale">
+                            <label class="form-check-label" for="genderFemale">F</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="control-label" for="birthday">Data di nascita</label>
+                        <div class="col">
+                            <input class="form-control" type="date" value="{{dob}}" name="birthday" id="birthday"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row p-0">
+                        <label class="control-label" for="birthProvince">Città di Nascita</label>
+                        <div class="col-3">
+                            <select id="birthProvince" class="form-select col-3">
+                                <option>Provincia</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select col-7" id="birthCity" name="birthCity" required>
+                                <option>Selezionare prima la Provincia</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-center mt-2">
+                            <button class="btn btn-primary">Calcola Codice Fiscale</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{#fiscalCode}}
+        <div class="row">
+            <div class="offset-2 col-8 text-center alert alert-success">{{fiscalCode}}</div>
+        </div>
+        {{/fiscalCode}}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function () {
+            let loadCities = (p) => {
+                $.ajax({
+                    url: `/api/cities/${p}`,
+                    type: 'get',
+                    success: (data) => {
+                        $(data).each((_, e) =>
+                            $("<option>").text(e.name).val(e.cadastral).appendTo($("#birthCity"))
+                        )
+                    }
+                })
+            }
+            let emptyCities = () => {
+                let c = $("#birthCity")
+                c.empty()
+                $("<option>").text("Selezionare una provincia").val(0).appendTo(c)
+            }
+            let loadProvinces = () => {
+                $.ajax({
+                    url: '/api/provinces',
+                    type: 'get',
+                    success: (data) => {
+                        let p = $("#birthProvince")
+                        p.empty()
+                        $("<option>").val(0).text("Provincia").appendTo(p)
+                        $(data).each((_, e) => {
+                            $("<option>").text(e.name).val(e.acronym).appendTo(p)
+                        })
+                        emptyCities()
+                    }
+                })
+            }
+            loadProvinces()
+
+            $("#birthProvince").change(() => {
+                let p = $("#birthProvince").val()
+                console.log(p)
+                if (p) loadCities(p)
+            })
+        })
+    </script>
+</body>
+
+</html>

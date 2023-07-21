@@ -1,0 +1,4 @@
+{
+    "serviceKey": "csv",
+    "citiesCsv": "./assets/cities/comuni.csv"
+}

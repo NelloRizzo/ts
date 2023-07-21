@@ -1,0 +1,8 @@
+All'indirizzo 
+https://jsonplaceholder.typicode.com/todos
+e all'indirizzo
+https://jsonplaceholder.typicode.com/users
+sono presenti rispettivamente un elenco di cose da fare 
+e un elenco di utenti
+Scrivere un servizio che restituisca per ogni todo
+il nome dell'utente, il titolo del todo e lo stato dell'attività

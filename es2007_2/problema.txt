@@ -1,0 +1,10 @@
+Su un file di testo è contenuta la lista della spesa
+Ogni elemento è strutturato in questo modo
+Nome dell'articolo
+quantità da comprare
+prezzo di riferimento
+data dell'acquisto
+stato (acquistato|non acquistato)
+
+La nostra applicazione deve poter aggiungere elementi alla lista
+e mostrare la lista della giornata corrente

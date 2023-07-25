@@ -1,0 +1,5 @@
+Si rende necessario gestire una rubrica di contatti
+in cui ogni contatto può avere uno o più recapiti.
+Un recapito può essere un numero di telefono, un indirizzo email o altro...
+Occorre implementare la parte di UI in HTML e la parte di servizi in
+un'app Node.Js
